@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Reina Princesa Mi Elegancia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Panel de Administración</h1>
+    <form id="settings-form">
+        <label for="event-title">Título del Evento:</label>
+        <input type="text" id="event-title" placeholder="Título del evento">
+        
+        <label for="theme">Seleccionar Tema:</label>
+        <select id="theme">
+            <option value="light">Claro</option>
+            <option value="dark">Oscuro</option>
+            <option value="gradient">Degradado</option>
+        </select>
+
+        <h2>Cargar Imágenes del Carrusel</h2>
+        <input type="file" id="carousel-images" multiple>
+        <button type="button" id="upload-images">Cargar Imágenes</button>
+    </form>
+
+    <button id="logout">Cerrar Sesión</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
