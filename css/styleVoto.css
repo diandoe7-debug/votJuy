@@ -1,0 +1,86 @@
+ @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #f5f0ff 0%, #e6e6fa 25%, #d8bfd8 50%, #e6e6fa 75%, #f5f0ff 100%);
+            min-height: 100vh;
+        }
+        
+        .crown-icon {
+            color: #f8c300;
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .candidate-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, #ffffff, #f8f4ff);
+            box-shadow: 0 4px 20px rgba(139, 69, 19, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .candidate-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(139, 69, 19, 0.2);
+        }
+        
+        .vote-btn {
+            background: linear-gradient(45deg, #c19a6b, #8b4513);
+            transition: all 0.3s ease;
+        }
+        
+        .vote-btn:disabled {
+            background: #cccccc;
+        }
+        
+        .vote-btn:hover:not(:disabled) {
+            background: linear-gradient(45deg, #8b4513, #c19a6b);
+            transform: scale(1.05);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #fffaf0, #fff5e6);
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 400px;
+            position: relative;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border-radius: 0;
+            animation: fall linear forwards;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
