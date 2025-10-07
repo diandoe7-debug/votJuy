@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Jurado - Reina Princesa Mi Elegancia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f0ff 0%, #e6e6fa 25%, #d8bfd8 50%, #e6e6fa 75%, #f5f0ff 100%);
+            min-height: 100vh;
+        }
+        
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.15);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(45deg, #c19a6b, #8b4513);
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #8b4513, #c19a6b);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center py-8">
+    <div class="form-container p-8 md:p-10 max-w-lg mx-auto">
+        <h2 class="text-3xl font-bold text-center text-purple-800 mb-8">
+            Agregar Jurado
+        </h2>
+        
+        <form id="jury-form" class="space-y-6">
+            <div>
+                <label for="dni" class="block text-lg font-semibold text-purple-700 mb-2">DNI</label>
+                <input type="text" id="dni" required 
+                       class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300"
+                       placeholder="Ej: 12345678">
+            </div>
+
+            <div>
+                <label for="cell" class="block text-lg font-semibold text-purple-700 mb-2">Celular</label>
+                <input type="tel" id="cell" required 
+                       class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300"
+                       placeholder="Ej: 987654321">
+            </div>
+
+            <div>
+                <label for="name" class="block text-lg font-semibold text-purple-700 mb-2">Nombre</label>
+                <input type="text" id="name" required 
+                       class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300"
+                       placeholder="Ej: Juan Pérez">
+            </div>
+
+            <div>
+                <label for="position" class="block text-lg font-semibold text-purple-700 mb-2">Cargo</label>
+                <select id="position" required 
+                        class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300">
+                    <option value="" disabled selected>Selecciona un cargo</option>
+                    <option value="profesor">Profesor</option>
+                    <option value="director">Director</option>
+                    <option value="externo">Externo</option>
+                    <option value="jurado">Jurado</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="username" class="block text-lg font-semibold text-purple-700 mb-2">Usuario</label>
+                <input type="text" id="username" required 
+                       class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300"
+                       placeholder="Ej: juanperez">
+            </div>
+
+            <div>
+                <label for="password" class="block text-lg font-semibold text-purple-700 mb-2">Contraseña</label>
+                <input type="password" id="password" required 
+                       class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300"
+                       placeholder="********">
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="submit-btn text-white px-8 py-4 rounded-full font-semibold text-lg">
+                    Agregar Jurado
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('jury-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const juryData = {
+                dni: document.getElementById('dni').value,
+                cell: document.getElementById('cell').value,
+                name: document.getElementById('name').value,
+                position: document.getElementById('position').value,
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value
+            };
+            
+            // Save to localStorage (or send to server)
+            let juries = JSON.parse(localStorage.getItem('juries')) || [];
+            juries.push(juryData);
+            localStorage.setItem('juries', JSON.stringify(juries));
+            
+            // Reset form
+            this.reset();
+            alert('Jurado agregado exitosamente');
+        });
+    </script>
+</body>
+</html>

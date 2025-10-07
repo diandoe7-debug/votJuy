@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reina Princesa Mi Elegancia - Votación</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+      <link rel="stylesheet" href="./css/styleVoto.css">
+
+</head>
+<body class="min-h-screen py-8">
+    <!-- Header Section -->
+    <header class="text-center mb-12">
+        <div class="max-w-4xl mx-auto px-4">
+            <h1 class="text-5xl md:text-6xl font-bold text-purple-900 mb-4 font-cinzel">
+                <i class="fas fa-crown crown-icon mr-3"></i>
+                Elección Reina
+                <i class="fas fa-crown crown-icon ml-3"></i>
+            </h1>
+            <p class="text-xl text-gray-700 mb-6">Vota por tu candidata favorita</p>
+            
+            <!-- Voting Instructions -->
+            <div class="bg-white bg-opacity-90 rounded-xl p-6 shadow-lg mb-8">
+                <h2 class="text-2xl font-semibold text-purple-800 mb-3">
+                    <i class="fas fa-star text-yellow-400 mr-2"></i>
+                    Instrucciones de Votación
+                </h2>
+                <p class="text-gray-600 mb-2">Elige a tu candidata favorita haciendo clic en el botón "Votar"</p>
+                <p class="text-gray-600 mb-2">Cada persona puede votar una sola vez</p>
+                <p class="text-gray-600">Los resultados se mostrarán automáticamente después de votar</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Candidates Grid -->
+    <main class="max-w-6xl mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="candidates-grid">
+            <!-- Candidate 1 -->
+            <div class="candidate-card group">
+                <div class="relative overflow-hidden">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a8f3af84-d4c5-428f-aa26-0bafb7566bbd.png" 
+                         alt="Elegant young queen candidate with long dark hair, wearing a royal blue evening gown and diamond tiara, standing in a palace ballroom with golden accents" 
+                         class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                         onerror="this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1e6ece18-566f-4819-98e5-d10674e7bfcf.png/003366/white?text=Elegant+Queen'">
+                    <div class="absolute top-4 right-4 bg-yellow-400 text-purple-900 px-3 py-1 rounded-full font-semibold">
+                        #1
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-purple-800 mb-2">Isabella Montoya</h3>
+                    <p class="text-gray-600 mb-4">23 años • Estudiantes de Derecho</p>
+                    <p class="text-gray-700 mb-4">"La elegancia no es sobresalir, sino ser recordada por tu esencia"</p>
+                    <div class="flex items-center justify-between">
+                        <span class="votes-count text-2xl font-bold text-purple-700">0 votos</span>
+                        <button class="vote-btn text-white px-6 py-3 rounded-full font-semibold transition-all" 
+                                onclick="vote(1)">
+                            <i class="fas fa-vote-yea mr-2"></i>Votar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Candidate 2 -->
+            <div class="candidate-card group">
+                <div class="relative overflow-hidden">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c99b3c5a-deff-45ff-a187-f5d01223a58c.png" 
+                         alt="Radiant princess candidate with blonde hair in elegant updo, wearing a sparkling silver gown and pearl accessories, posing in a garden with roses" 
+                         class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                         onerror="this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3ee39512-4938-433b-b0fc-a8e4548557e4.png/666699/white?text=Radiant+Princess'">
+                    <div class="absolute top-4 right-4 bg-yellow-400 text-purple-900 px-3 py-1 rounded-full font-semibold">
+                        #2
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-purple-800 mb-2">Sofía Valdez</h3>
+                    <p class="text-gray-600 mb-4">22 años • Bailarina Profesional</p>
+                    <p class="text-gray-700 mb-4">"La gracia en el movimiento y la poesía en el alma"</p>
+                    <div class="flex items-center justify-between">
+                        <span class="votes-count text-2xl font-bold text-purple-700">0 votos</span>
+                        <button class="vote-btn text-white px-6 py-3 rounded-full font-semibold transition-all" 
+                                onclick="vote(2)">
+                            <i class="fas fa-vote-yea mr-2"></i>Votar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Candidate 3 -->
+            <div class="candidate-card group">
+                <div class="relative overflow-hidden">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cd94fdca-60e4-4627-b988-8ebb2da387b5.png" 
+                         alt="Sophisticated royal contestant with chestnut brown hair, wearing a deep crimson ballgown with gold embroidery, holding a bouquet of red roses" 
+                         class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                         onerror="this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f02f2a7f-882c-4d2d-9bd9-f8741fca0cca.png/990000/white?text=Sophisticated+Royal'">
+                    <div class="absolute top-4 right-4 bg-yellow-400 text-purple-900 px-3 py-1 rounded-full font-semibold">
+                        #3
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-purple-800 mb-2">Valentina Reyes</h3>
+                    <p class="text-gray-600 mb-4">24 años • Empresaria</p>
+                    <p class="text-gray-700 mb-4">"La verdadera realeza se encuentra en el corazón"</p>
+                    <div class="flex items-center justify-between">
+                        <span class="votes-count text-2xl font-bold text-purple-700">0 votos</span>
+                        <button class="vote-btn text-white px-6 py-3 rounded-full font-semibold transition-all" 
+                                onclick="vote(3)">
+                            <i class="fas fa-vote-yea mr-2"></i>Votar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Candidate 4 -->
+            <div class="candidate-card group">
+                <div class="relative overflow-hidden">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3b69cddb-d465-4806-90ac-6828bc1576e9.png" 
+                         alt="Graceful princess candidate with auburn hair, wearing an emerald green silk gown with floral patterns, standing by a vintage window with draped curtains" 
+                         class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                         onerror="this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1d2a112d-0b80-46a6-adbe-b8bf5b0c52ca.png'">
+                    <div class="absolute top-4 right-4 bg-yellow-400 text-purple-900 px-3 py-1 rounded-full font-semibold">
+                        #4
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-purple-800 mb-2">Camila Ortega</h3>
+                    <p class="text-gray-600 mb-4">21 años • Estudiante de Medicina</p>
+                    <p class="text-gray-700 mb-4">"La belleza cura el alma, la compasión cura el corazón"</p>
+                    <div class="flex items-center justify-between">
+                        <span class="votes-count text-2xl font-bold text-purple-700">0 votos</span>
+                        <button class="vote-btn text-white px-6 py-3 rounded-full font-semibold transition-all" 
+                                onclick="vote(4)">
+                            <i class="fas fa-vote-yea mr-2"></i>Votar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Candidate 5 -->
+            <div class="candidate-card group">
+                <div class="relative overflow-hidden">
+                    <img src="https://placehold.co/400x500" 
+                         alt="Ethereal queen candidate with platinum blonde hair, wearing a lavender chiffon gown with crystal embellishments, in a moonlit garden setting" 
+                         class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                         onerror="this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a32510ce-ac05-4160-a79a-625ff0e5e7bc.png'">
+                    <div class="absolute top-4 right-4 bg-yellow-400 text-purple-900 px-3 py-1 rounded-full font-semibold">
+                        #5
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-purple-800 mb-2">Lucía Mendoza</h3>
+                    <p class="text-gray-600 mb-4">25 años • Artista Visual</p>
+                    <p class="text-gray-700 mb-4">"Donde hay creatividad, hay magia en el aire"</p>
+                    <div class="flex items-center justify-between">
+                        <span class="votes-count text-2xl font-bold text-purple-700">0 votos</span>
+                        <button class="vote-btn text-white px-6 py-3 rounded-full font-semibold transition-all" 
+                                onclick="vote(5)">
+                            <i class="fas fa-vote-yea mr-2"></i>Votar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Candidate 6 -->
+            <div class="candidate-card group">
+                <div class="relative overflow-hidden">
+                    <img src="https://placehold.co/400x500" 
+                         alt="Regal princess candidate with jet black hair, wearing a gold brocade gown with intricate patterns, seated on a velvet throne with ornate carvings" 
+                         class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                         onerror="this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8bf7e73d-2bb2-4bb8-a10a-dc22af194b10.png'">
+                    <div class="absolute top-4 right-4 bg-yellow-400 text-purple-900 px-3 py-1 rounded-full font-semibold">
+                        #6
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-purple-800 mb-2">Gabriela Silva</h3>
+                    <p class="text-gray-600 mb-4">23 años • Modelo Profesional</p>
+                    <p class="text-gray-700 mb-4">"La confianza es el accesorio más elegante"</p>
+                    <div class="flex items-center justify-between">
+                        <span class="votes-count text-2xl font-bold text-purple-700">0 votos</span>
+                        <button class="vote-btn text-white px-6 py-3 rounded-full font-semibold transition-all" 
+                                onclick="vote(6)">
+                            <i class="fas fa-vote-yea mr-2"></i>Votar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Results Section -->
+    <section class="max-w-4xl mx-auto px-4 mt-16">
+        <div class="bg-white bg-opacity-95 rounded-xl p-8 shadow-xl">
+            <h2 class="text-3xl font-bold text-center text-purple-900 mb-8">
+                <i class="fas fa-chart-bar text-purple-600 mr-3"></i>
+                Resultados en Tiempo Real
+            </h2>
+            <div id="results-container" class="space-y-4">
+                <!-- Results will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center mt-16 py-8 text-gray-600">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="mb-4">© 2024 Reina Princesa Mi Elegancia - Concurso de Elegancia y Belleza</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="text-purple-600 hover:text-purple-800 transition-colors">
+                    <i class="fab fa-facebook-f text-xl"></i>
+                </a>
+                <a href="#" class="text-purple-600 hover:text-purple-800 transition-colors">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="#" class="text-purple-600 hover:text-purple-800 transition-colors">
+                    <i class="fab fa-twitter text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-content">
+            <span class="absolute top-4 right-4 text-2xl cursor-pointer" onclick="closeModal()">&times;</span>
+            <div class="text-center">
+                <i class="fas fa-check-circle text-5xl text-green-500 mb-4"></i>
+                <h3 class="text-2xl font-bold text-purple-800 mb-4">¡Voto Registrado!</h3>
+                <p class="text-gray-600 mb-6">Tu voto ha sido registrado exitosamente. ¡Gracias por participar!</p>
+                <button onclick="closeModal()" class="vote-btn text-white px-8 py-3 rounded-full font-semibold">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+
+  <!-- Enlace a tu JavaScript -->
+  <script src="js/scriptVoto.js"></script>
+</body>
+</html>
+

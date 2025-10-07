@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Candidatas - Reina Princesa Mi Elegancia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe6e6 25%, #f8d7da 50%, #ffe6e6 75%, #fff0f5 100%);
+            min-height: 100vh;
+        }
+        
+        .crown-icon {
+            color: #f8c300;
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .form-container {
+            background: linear-gradient(145deg, #ffffff, #fffaf0);
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.15);
+            border-radius: 25px;
+            border: 2px solid #f8e0d9;
+        }
+        
+        .input-field {
+            background: rgba(255, 250, 240, 0.8);
+            border: 2px solid #e6d7c7;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            border-color: #c19a6b;
+            box-shadow: 0 0 0 3px rgba(193, 154, 107, 0.2);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(45deg, #d4af37, #f8c300);
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #f8c300, #d4af37);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .preview-image {
+            border: 3px solid #e6d7c7;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .preview-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.2);
+        }
+        
+        .success-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #4caf50, #45a049);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transform: translateX(100%);
+            transition: transform 0.5s ease;
+            z-index: 1000;
+        }
+        
+        .success-toast.show {
+            transform: translateX(0);
+        }
+        
+        .file-input-label {
+            background: linear-gradient(45deg, #c19a6b, #8b4513);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .file-input-label:hover {
+            background: linear-gradient(45deg, #8b4513, #c19a6b);
+        }
+        
+        .back-btn {
+            background: linear-gradient(45deg, #6c757d, #495057);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: linear-gradient(45deg, #495057, #6c757d);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-8">
+    <!-- Header Section -->
+    <header class="text-center mb-12">
+        <div class="max-w-4xl mx-auto px-4">
+            <h1 class="text-5xl md:text-6xl font-bold text-purple-900 mb-4 font-cinzel">
+                <i class="fas fa-crown crown-icon mr-3"></i>
+                Registro de Candidatas
+                <i class="fas fa-crown crown-icon ml-3"></i>
+            </h1>
+            <p class="text-xl text-gray-700 mb-6">Formulario para nuevas participantes</p>
+            
+            <!-- Navigation -->
+            <div class="flex justify-center space-x-4 mb-8">
+                <a href="votacion-reinas.html" class="back-btn text-white px-6 py-3 rounded-full font-semibold">
+                    <i class="fas fa-arrow-left mr-2"></i>Volver a Votación
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Registration Form -->
+    <main class="max-w-4xl mx-auto px-4">
+        <div class="form-container p-8 md:p-10">
+            <h2 class="text-3xl font-bold text-center text-purple-800 mb-8">
+                <i class="fas fa-user-plus text-purple-600 mr-3"></i>
+                Nueva Candidata
+            </h2>
+            
+            <form id="registration-form" class="space-y-6">
+                <!-- Photo Upload -->
+                <div class="text-center">
+                    <label class="block text-lg font-semibold text-purple-700 mb-4">
+                        <i class="fas fa-camera text-purple-600 mr-2"></i>
+                        Fotografía de la Candidata
+                    </label>
+                    
+                    <div class="flex flex-col items-center space-y-4">
+                        <div class="preview-image w-48 h-64 bg-gray-200 rounded-lg overflow-hidden mb-4">
+                            <img id="image-preview" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c1060535-1ee8-490d-9bf1-f4df71c05a4f.png" 
+                                 alt="Vista previa de la fotografía de la candidata - imagen placeholder para upload de foto"
+                                 class="w-full h-full object-cover"
+                                 onerror="this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8fda23d6-91a4-49a6-a75e-a41f41d2d932.png'">
+                        </div>
+                        
+                        <label for="photo-upload" class="file-input-label text-white px-6 py-3 rounded-full font-semibold cursor-pointer">
+                            <i class="fas fa-upload mr-2"></i>Seleccionar Foto
+                        </label>
+                        <input type="file" id="photo-upload" accept="image/*" class="hidden" onchange="previewImage(event)">
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="full-name" class="block text-lg font-semibold text-purple-700 mb-2">
+                            <i class="fas fa-user text-purple-600 mr-2"></i>
+                            Nombre Completo
+                        </label>
+                        <input type="text" id="full-name" required 
+                               class="input-field w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-purple-300"
+                               placeholder="Ej: Isabella Montoya">
+                    </div>
+                    
+                    <div>
+                        <label for="age" class="block text-lg font-semibold text-purple-700 mb-2">
+                            <i class="fas fa-birthday-cake text-purple-600 mr-2"></i>
+                            Edad
+                        </label>
+                        <input type="number" id="age" required min="18" max="35"
+                               class="input-field w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-purple-300"
+                               placeholder="Ej: 23">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="occupation" class="block text-lg font-semibold text-purple-700 mb-2">
+                        <i class="fas fa-briefcase text-purple-600 mr-2"></i>
+                        Ocupación/Profesión
+                    </label>
+                    <input type="text" id="occupation" required 
+                           class="input-field w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-purple-300"
+                           placeholder="Ej: Estudiante de Derecho">
+                </div>
+
+                <div>
+                    <label for="quote" class="block text-lg font-semibold text-purple-700 mb-2">
+                        <i class="fas fa-quote-left text-purple-600 mr-2"></i>
+                        Frase o Lema Personal
+                    </label>
+                    <textarea id="quote" required rows="3"
+                              class="input-field w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-purple-300 resize-none"
+                              placeholder='Ej: "La elegancia no es sobresalir, sino ser recordada por tu esencia"'></textarea>
+                </div>
+
+                <!-- Additional Information -->
+                <div>
+                    <label class="block text-lg font-semibold text-purple-700 mb-4">
+                        <i class="fas fa-star text-yellow-400 mr-2"></i>
+                        Información Adicional (Opcional)
+                    </label>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="hobbies" class="block text-gray-600 mb-2">Pasatiempos</label>
+                            <input type="text" id="hobbies"
+                                   class="input-field w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-purple-300"
+                                   placeholder="Ej: Bailar, leer, pintar">
+                        </div>
+                        
+                        <div>
+                            <label for="talents" class="block text-gray-600 mb-2">Talentos Especiales</label>
+                            <input type="text" id="talents"
+                                   class="input-field w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-purple-300"
+                                   placeholder="Ej: Canto, piano, deportes">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center pt-6">
+                    <button type="submit" class="submit-btn text-white px-8 py-4 rounded-full font-semibold text-lg">
+                        <i class="fas fa-save mr-2"></i>Registrar Candidata
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Registered Candidates Section -->
+    <section class="max-w-6xl mx-auto px-4 mt-16">
+        <div class="bg-white bg-opacity-95 rounded-xl p-8 shadow-xl">
+            <h2 class="text-3xl font-bold text-center text-purple-900 mb-8">
+                <i class="fas fa-users text-purple-600 mr-3"></i>
+                Candidatas Registradas
+            </h2>
+            
+            <div id="registered-candidates" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Will be populated by JavaScript -->
+                <div class="text-center text-gray-500 py-8">
+                    <i class="fas fa-user-circle text-4xl mb-4"></i>
+                    <p>No hay candidatas registradas aún</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Toast -->
+    <div id="success-toast" class="success-toast">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle text-2xl mr-3"></i>
+            <span class="font-semibold">¡Candidata registrada exitosamente!</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-16 py-8 text-gray-600">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="mb-4">© 2024 Reina Princesa Mi Elegancia - Sistema de Registro</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="text-purple-600 hover:text-purple-800 transition-colors">
+                    <i class="fab fa-facebook-f text-xl"></i>
+                </a>
+                <a href="#" class="text-purple-600 hover:text-purple-800 transition-colors">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="#" class="text-purple-600 hover:text-purple-800 transition-colors">
+                    <i class="fab fa-twitter text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+        <script>
+                // Image preview functionality
+                function previewImage(event) {
+                    const input = event.target;
+                    const preview = document.getElementById('image-preview');
+                    
+                    if (input.files && input.files[0]) {
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(e) {
+                            preview.src = e.target.result;
+                            preview.alt = "Vista previa de la fotografía de la candidata seleccionada";
+                        }
+                        
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+                
+                // Form submission
+                document.getElementById('registration-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const formData = {
+                        fullName: document.getElementById('full-name').value,
+                        age: document.getElementById('age').value,
+                        occupation: document.getElementById('occupation').value,
+                        quote: document.getElementById('quote').value,
+                        hobbies: document.getElementById('hobbies').value,
+                        talents: document.getElementById('talents').value,
+                        photo: document.getElementById('image-preview').src
+                    };
+                    
+                    // Validate required fields
+                    if (!formData.fullName || !formData.age || !formData.occupation || !formData.quote) {
+                        alert('Por favor complete todos los campos obligatorios');
+                        return;
+                    }
+                    
+                    // Save to localStorage
+                    saveCandidate(formData);
+                    
+                    // Show success message
+                    showSuccessToast();
+                    
+                    // Reset form
+                    this.reset();
+                    document.getElementById('image-preview').src = 'https://placehold.co/192x256/f5f5f5/666666?text=Subir+Foto';
+                    document.getElementById('image-preview').alt = 'Vista previa de la fotografía de la candidata - imagen placeholder para upload de foto';
+                    
+                    // Update registered candidates list
+                    updateRegisteredCandidates();
+                });
+                
+                function saveCandidate(candidate) {
+                    let candidates = JSON.parse(localStorage.getItem('candidates')) || [];
+                    // Add ID and timestamp
+                    candidate.id = Date.now();
+                    candidate.registrationDate = new Date().toLocaleDateString();
+                    candidate.votes = 0;
+                    
+                    candidates.push(candidate);
+                    localStorage.setItem('candidates', JSON.stringify(candidates));
+                }
+                
+                function showSuccessToast() {
+                    const toast = document.getElementById('success-toast');
+                    toast.classList.add('show');
+                    
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 3000);
+                }
+                
+                function updateRegisteredCandidates() {
+                    const container = document.getElementById('registered-candidates');
+                    const candidates = JSON.parse(localStorage.getItem('candidates')) || [];
+                    
+                    if (candidates.length === 0) {
+                        container.innerHTML = `
+                            <div class="text-center text-gray-500 py-8 col-span-full">
+                                <i class="fas fa-user-circle text-4xl mb-4"></i>
+                                <p>No hay candidatas registradas aún</p>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    container.innerHTML = candidates.map(candidate => `
+                        <div class="bg-purple-50 rounded-xl p-6 text-center">
+                            <div class="mb-4">
+                                <img src="${candidate.photo}" 
+                                    alt="Fotografía de ${candidate.fullName}" 
+                                    class="w-32 h-40 object-cover rounded-lg shadow-md">
+                            </div>
+                            <h3 class="text-xl font-bold text-purple-800">${candidate.fullName}</h3>
+                            <p class="text-gray-600">Edad: ${candidate.age} años</p>
+                            <p class="text-gray-600">Ocupación: ${candidate.occupation}</p>
+                            <p class="text-gray-600 italic">"${candidate.quote}"</p>
+                            <p class="text-gray-500 text-sm">Registrada el: ${candidate.registrationDate}</p>
+                        </div>
+                    `).join('');
+                }
+
+            document.addEventListener('DOMContentLoaded', updateRegisteredCandidates);
+        </script>
+    
+</body>
+</html>
