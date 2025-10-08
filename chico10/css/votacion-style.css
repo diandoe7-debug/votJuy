@@ -1,0 +1,285 @@
+/* Estilos específicos para votación-candidatos.html - Extiende el CSS global */
+/* Galería de Candidatos - Estilo Moderno 3D y Movimiento */
+.candidates-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.candidate-card {
+    background-color: var(--bg-secondary);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Easing moderno para movimiento fluido */
+    transform: translateZ(0); /* Para 3D */
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.candidate-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(0, 0, 0, 0));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.candidate-card:hover::before {
+    opacity: 1;
+}
+
+.candidate-card:hover {
+    transform: translateY(-10px) rotateX(5deg) rotateY(5deg); /* Efecto 3D tilt en hover */
+    box-shadow: var(--shadow-3d);
+}
+
+.candidate-photo-container {
+    position: relative;
+    margin: 0 auto 1rem;
+}
+
+.candidate-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    display: block;
+}
+
+.candidate-photo:hover {
+    border-color: var(--accent-gold);
+    transform: scale(1.05);
+}
+
+/* Logo EPA Jujuy en esquina superior izquierda de la foto */
+.epa-logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--bg-primary);
+    font-size: 0.8rem;
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Filtro Gris para Votados */
+.candidate-card.voted .candidate-photo {
+    filter: grayscale(100%) opacity(0.6);
+    cursor: pointer; /* Aún clickable para editar */
+}
+
+.candidate-card.voted::after {
+    content: '✓ Votado';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--accent-gold);
+    color: var(--bg-primary);
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.candidate-name {
+    font-family: 'Georgia', serif;
+    color: var(--accent-gold);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.candidate-age {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.candidate-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Select de Jurado */
+.jurado-select {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.jurado-select label {
+    color: var(--accent-gold);
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
+.jurado-select select {
+    padding: 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Modal para Votación/Edición - Ventana Emergente Mejorada */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from { 
+        opacity: 0; 
+        transform: scale(0.9) rotateY(-10deg); /* Animación 3D de entrada */
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1) rotateY(0deg); 
+    }
+}
+
+.modal-content {
+    background-color: var(--bg-secondary);
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: var(--shadow-3d);
+    transform: translateY(-50px);
+    transition: transform 0.3s ease;
+    animation: modalSlideIn 0.4s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from { transform: translateY(-100px) scale(0.95); }
+    to { transform: translateY(0) scale(1); }
+}
+
+.modal-content h2 {
+    color: var(--accent-gold);
+    margin-bottom: 1rem;
+    font-family: 'Georgia', serif;
+}
+
+.score-section {
+    margin: 1rem 0;
+    text-align: left;
+}
+
+.score-section label {
+    display: block;
+    color: var(--accent-gold);
+    margin-bottom: 0.5rem;
+}
+
+.score-input {
+    width: 60px;
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: border-color 0.3s ease;
+}
+
+.score-input.invalid {
+    border-color: #ff4444;
+    box-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
+}
+
+.score-input:focus {
+    border-color: var(--accent-gold);
+    outline: none;
+}
+
+.total-score-modal {
+    margin: 1rem 0;
+    font-size: 1.1rem;
+    color: var(--accent-gold);
+    font-weight: bold;
+}
+
+.close {
+    color: var(--text-secondary);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: var(--accent-gold);
+    transform: scale(1.2);
+}
+
+.modal-buttons {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.modal-buttons .btn {
+    flex: 1;
+    margin: 0 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .candidates-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .candidate-photo {
+        width: 150px;
+        height: 150px;
+    }
+
+    .epa-logo {
+        width: 30px;
+        height: 30px;
+        font-size: 0.7rem;
+    }
+
+    .modal-content {
+        margin: 10% auto;
+        padding: 1.5rem;
+        width: 95%;
+    }
+
+    .modal-buttons {
+        flex-direction: column;
+    }
+}

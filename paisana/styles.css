@@ -1,0 +1,559 @@
+/* styles.css - Diseño inspirado en folclore argentino: gauchos, paisanas, pampa. Colores: tierra (marrón #8B4513), dorado (#DAA520), verde pampa (#228B22), rojo poncho (#CD5C5C). Fuentes elegantes y rústicas. Efectos 3D con sombras y transforms para profundidad. Completado al 100%. */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Playfair Display', serif; /* Elegante, como un libro de gauchadas */
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #f4e4bc 0%, #deb887 50%, #cd853f 100%); /* Gradiente pampa al atardecer */
+    color: #333;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(210, 105, 30, 0.1) 0%, transparent 50%), /* Nodos gauchos */
+        radial-gradient(circle at 80% 20%, rgba(34, 139, 34, 0.05) 0%, transparent 50%); /* Campos verdes */
+    z-index: -1;
+    animation: subtle-breeze 20s ease-in-out infinite alternate;
+}
+
+@keyframes subtle-breeze {
+    0% { transform: translateX(0) translateY(0); }
+    100% { transform: translateX(-10px) translateY(-5px); }
+}
+
+header.header-gaucho {
+    background: linear-gradient(to bottom, rgba(139, 69, 19, 0.9), rgba(210, 105, 30, 0.8)); /* Sombrero y poncho */
+    color: #fff;
+    padding: 2rem 1rem;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3); /* Sombra 3D para profundidad */
+    transform: perspective(1000px) rotateX(5deg); /* Efecto 3D sutil */
+}
+
+.header-content h1 {
+    margin: 0;
+    font-family: 'Cinzel', serif; /* Fuente mayúscula, como inscripción en piedra */
+    font-size: 3em;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+    letter-spacing: 2px;
+}
+
+.logo-folclorico {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 1.5em;
+}
+
+.logo-folclorico i {
+    font-size: 2em;
+    color: #DAA520; /* Dorado para iconos */
+    animation: bounce-gaucho 2s ease-in-out infinite;
+}
+
+@keyframes bounce-gaucho {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.subtitle {
+    font-style: italic;
+    margin: 1rem 0;
+    font-size: 1.2em;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nav-folclorica ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.nav-folclorica li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    background: rgba(218, 165, 32, 0.2);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-folclorica li a:hover {
+    background: rgba(218, 165, 32, 0.5);
+    transform: scale(1.05) translateY(-3px); /* Efecto hover 3D */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.header-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 20px); /* Patrón poncho */
+    opacity: 0.3;
+}
+
+main.main-pampa {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.section {
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15); /* Sombra 3D profunda */
+    margin-bottom: 3rem;
+    backdrop-filter: blur(10px); /* Efecto vidrio esmerilado */
+    border: 1px solid rgba(218, 165, 32, 0.3);
+    transform: perspective(800px) rotateX(2deg); /* Profundidad 3D */
+    transition: transform 0.5s ease;
+}
+
+.section.active {
+    display: block;
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.section:hover {
+    transform: perspective(800px) rotateX(1deg) translateY(-5px);
+}
+
+.card-folclorica {
+    position: relative;
+}
+
+.card-folclorica::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, #DAA520, #CD5C5C); /* Adorno superior como bordado */
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.section-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5em;
+    color: #8B4513;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.section-header p {
+    font-style: italic;
+    color: #666;
+    font-size: 1.1em;
+}
+
+.form-rustico {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.input-group.flex-row {
+    flex-direction: row;
+    gap: 1rem;
+    align-items: end;
+}
+
+.input-group label {
+    font-weight: bold;
+    color: #8B4513;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.input-group i {
+    color: #DAA520;
+}
+
+input, textarea, select {
+    padding: 1rem;
+    border: 2px solid #deb887;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.8);
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #DAA520;
+    box-shadow: 0 0 10px rgba(218, 165, 32, 0.3);
+    transform: scale(1.02); /* Efecto zoom sutil */
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.btn-gaucho {
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, #CD5C5C, #8B4513); /* Rojo poncho a marrón */
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem auto 0;
+}
+
+.btn-gaucho:hover {
+    background: linear-gradient(45deg, #8B4513, #CD5C5C);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
+}
+
+.btn-gaucho.grande {
+    padding: 1.2rem 3rem;
+    font-size: 1.2em;
+}
+
+.btn-secundario {
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(45deg, #DAA520, #deb887);
+    color: #333;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.btn-secundario:hover {
+    background: linear-gradient(45deg, #deb887, #DAA520);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(218, 165, 32, 0.3);
+}
+
+.mensaje-folclorico {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(34, 139, 34, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    font-style: italic;
+    color: #228B22;
+}
+
+.admin-panel {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(244, 228, 188, 0.5); /* Tono pampa claro */
+    border-radius: 15px;
+    border: 2px solid #deb887;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.admin-panel h3 {
+    color: #8B4513;
+    font-family: 'Cinzel', serif;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.lista-tradicional {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.lista-tradicional li {
+    background: rgba(218, 165, 32, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid #DAA520;
+    transition: all 0.3s ease;
+}
+
+.lista-tradicional li:hover {
+    background: rgba(218, 165, 32, 0.2);
+    transform: translateX(5px);
+}
+
+.lista-tradicional button {
+    background: #CD5C5C;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.lista-tradicional button:hover {
+    background: #8B4513;
+}
+
+.grid-candidatas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.grid-candidatas > div {
+    background: white;
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.grid-candidatas > div:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.grid-candidatas img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #DAA520;
+    margin-bottom: 0.5rem;
+}
+
+.grid-candidatas h4 {
+    color: #8B4513;
+    margin: 0.5rem 0;
+}
+
+.form-votacion {
+    margin: 2rem 0;
+    display: grid;
+    gap: 1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-votacion h3 {
+    text-align: center;
+    color: #8B4513;
+    font-family: 'Cinzel', serif;
+}
+
+.form-votacion img {
+    display: block;
+    margin: 0 auto 1rem;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid #DAA520;
+    object-fit: cover;
+}
+
+.form-votacion .input-group {
+    max-width: none;
+}
+
+.ranking-container {
+    overflow-x: auto;
+}
+
+.tabla-gaucha {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.tabla-gaucha th,
+.tabla-gaucha td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #deb887;
+}
+
+.tabla-gaucha th {
+    background: linear-gradient(45deg, #8B4513, #DAA520);
+    color: white;
+    font-weight: bold;
+    font-family: 'Cinzel', serif;
+}
+
+.tabla-gaucha tr:hover {
+    background: rgba(218, 165, 32, 0.1);
+    transform: scale(1.01);
+}
+
+.tabla-gaucha img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #DAA520;
+}
+
+.reporte-folclorico {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    border-left: 5px solid #228B22;
+}
+
+.reporte-folclorico h3 {
+    color: #228B22;
+    font-family: 'Cinzel', serif;
+}
+
+.reporte-folclorico ul {
+    list-style: disc;
+    padding-left: 2rem;
+}
+
+.grafico-pampa {
+    max-width: 100%;
+    height: 300px !important;
+    margin-top: 2rem;
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+footer.footer-pampa {
+    background: linear-gradient(to top, #8B4513, #CD5C5C);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 3rem;
+    font-style: italic;
+}
+
+footer.footer-pampa i {
+    color: #DAA520;
+}
+
+/* Responsive Design - Como un gaucho adaptándose al terreno */
+@media (max-width: 768px) {
+    .header-content h1 {
+        font-size: 2em;
+    }
+    
+    .nav-folclorica ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .nav-folclorica li a {
+        padding: 0.8rem 1rem;
+        justify-content: center;
+    }
+    
+    .section {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2em;
+    }
+    
+    .form-rustico {
+        max-width: 100%;
+    }
+    
+    .input-group.flex-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .grid-candidatas {
+        grid-template-columns: 1fr;
+    }
+    
+    .tabla-gaucha th,
+    .tabla-gaucha td {
+        padding: 0.5rem;
+        font-size: 0.9em;
+    }
+    
+    .tabla-gaucha img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .grafico-pampa {
+        height: 250px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-folclorico {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .logo-folclorico i {
+        font-size: 1.5em;
+    }
+    
+    .btn-gaucho {
+        padding: 0.8rem 1.5rem;
+        font-size: 1em;
+    }
+}

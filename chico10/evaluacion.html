@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votación de Candidatos - Elección CHICO 10</title>
+    <!-- CSS Global Existente (copiado aquí para integración completa; en producción, enlaza a style.css) -->
+    <style>
+        /* Reset y variables globales (del style.css original) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #000000;      /* Negro puro */
+            --bg-secondary: #1a1a1a;    /* Gris muy oscuro */
+            --text-primary: #ffffff;    /* Blanco */
+            --text-secondary: #cccccc;  /* Gris claro */
+            --accent-gold: #d4af37;     /* Dorado elegante */
+            --accent-silver: #c0c0c0;   /* Plateado alternativo */
+            --border: #333333;          /* Borde gris oscuro */
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra sutil */
+            --shadow-3d: 0 10px 20px rgba(0, 0, 0, 0.7), 0 0 50px rgba(212, 175, 55, 0.2); /* Sombra 3D moderna con glow dorado */
+        }
+
+        body {
+            font-family: 'Arial', sans-serif; /* Sans-serif para textos */
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            animation: fadeIn 0.5s ease-in; /* Animación de entrada suave */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Header y Logo (del original, adaptado) */
+        header {
+            background-color: var(--bg-secondary);
+            padding: 1rem 2rem;
+            border-bottom: 2px solid var(--accent-gold);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        header.scrolled {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .logo {
+            font-family: 'Georgia', serif; /* Serif para títulos */
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '👑'; /* Emoji corona como placeholder; reemplaza con SVG si prefieres */
+            position: absolute;
+            top: -10px;
+            right: -20px;
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px var(--accent-gold); }
+            to { text-shadow: 0 0 20px var(--accent-gold); }
+        }
+
+        /* Navegación (simplificada para esta página) */
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        nav li {
+            margin: 0 1rem;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background-color: var(--accent-gold);
+            color: var(--bg-primary);
+            transform: translateY(-2px); /* Animación hover */
+        }
+
+        /* Responsive: Hamburger en móvil */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none; /* Oculto por default en móvil */
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-secondary);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                font-size: 1.5rem;
+                color: var(--accent-gold);
+            }
+
+            header {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Contenido principal */
+        main {
+            margin-top: 80px; /* Espacio para header fijo */
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Botones generales (del original) */
+        .btn {
+            background-color: var(--accent-gold);
+            color: var(--bg-primary);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #b8962e;
+            transform: scale(1.05);
+            box-shadow: var(--shadow-3d);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-gold);
+            border: 2px solid var(--accent-gold);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-gold);
+            color: var(--bg-primary);
+        }
+
+        /* Galería de Candidatos - Estilo Moderno 3D y Movimiento */
+        .candidates-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .candidate-card {
+            background-color: var(--bg-secondary);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Easing moderno para movimiento fluido */
+            transform: translateZ(0); /* Para 3D */
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .candidate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(0, 0, 0, 0));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .candidate-card:hover::before {
+            opacity: 1;
+        }
+
+        .candidate-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg); /* Efecto 3D tilt en hover */
+            box-shadow: var(--shadow-3d);
+        }
+
+        .candidate-photo-container {
+            position: relative;
+            margin: 0 auto 1rem;
+        }
+
+        .candidate-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: block;
+        }
+
+        .candidate-photo:hover {
+            border-color: var(--accent-gold);
+            transform: scale(1.05);
+        }
+
+        /* Logo EPA Jujuy en esquina superior izquierda de la foto */
+        .epa-logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--bg-primary);
+            font-size: 0.8rem;
+            z-index: 2;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Filtro Gris para Votados */
+        .candidate-card.voted .candidate-photo {
+            filter: grayscale(100%) opacity(0.6);
+            cursor: pointer; /* Aún clickable para editar */
+        }
+
+        .candidate-card.voted::after {
+            content: '✓ Votado';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .candidate-name {
+            font-family: 'Georgia', serif;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .candidate-age {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .candidate-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Select de Jurado (opcional, pero incluido para contexto de jurados) */
+        .jurado-select {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .jurado-select label {
+            color: var(--accent-gold);
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .jurado-select select {
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        /* Modal para Votación/Edición - Pantalla Flotante Moderna */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-content {
+            background-color: var(--bg-secondary);
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: var(--shadow-3d);
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-content h2 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .score-section {
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .score-section label {
+            display: block;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .score-input {
+            width: 60px;
+            padding: 0.5rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .close {
+            color: var(--text-secondary);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--accent-gold);
+        }
+
+        .modal-buttons {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            main {
+                padding: 1rem;
+            }
+
+            .candidates-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+
+            .candidate-photo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .epa-logo {
+                width: 30px;
+                height: 30px;
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Footer simple */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--bg-secondary);
+            margin-top: 2rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">CHICO 10</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="votacion-candidatos.html">Votación</a></li>
+                <li><a href="ranking.html">Ranking</a></li>
+                <li><a href="estadisticas.html">Estadísticas</a></li>
+            </ul>
+            <div class="hamburger">☰</div>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1 style="font-family: 'Georgia', serif; color: var(--accent-gold); text-align: center; font-size: 3rem; margin-bottom: 1rem;">Votación de Candidatos</h1>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Haz clic en la foto de un candidato para votar o editar tu puntuación. Estilo inspirado en Mister Universe. Escuela Provincial de Arte de Jujuy (EPA).</p>
+
+            <!-- Select de Jurado (para persistir votos por jurado; opcional) -->
+            <div class="jurado-select">
+                <label for="juradoSelect">Seleccionar Jurado:</label>
+                <select id="juradoSelect">
+                    <option value="">Vota como jurado general (o selecciona uno)</option>
+                    <!-- Opciones se cargan dinámicamente por JS -->
+                </select>
+            </div>
+
+            <div id="candidatesGallery" class="candidates-gallery">
+                <!-- Galería de 20 candidatos se carga dinámicamente por JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Elección CHICO 10 - Escuela Provincial de Arte de Jujuy (EPA)</p>
+    </footer>
+
+    <!-- Modal para Votación/Edición -->
+    <div id="voteModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Votar por <span id="candidateNameModal"></span></h2>
+            <p id="modalMessage"></p>
+            <div id="scoresContainer" class="score-section">
+                <!-- Inputs de categorías se cargan dinámicamente -->
+            </div>
+            <div class="modal-buttons">
+                <button class="btn" onclick="saveVote()">Aceptar</button>
+                <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Integrado (lógica completa para esta página, compatible con localStorage del sistema original) -->
+    <script>
+        // Variables globales
+        let currentCandidate = null;
+        let currentJurorId = 1; // Default para votación general
+        let categories = [];
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            setupNavigation();
+            loadJurors();
+            loadCategories();
+            generateAndLoadCandidates();
+        });
+
+        // Funciones comunes (del main.js original)
+        function setupNavigation() {
+            const hamburger = document.querySelector('.hamburger');
+            const navUl = document.querySelector('nav ul');
+            if (hamburger && navUl) {
+                hamburger.addEventListener('click', () => {
+                    navUl.classList.toggle('active');
+                });
+            }
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Datos localStorage (compatible con sistema original)
+        function getData(key, defaultValue = []) {
+            return JSON.parse(localStorage.getItem(key)) || defaultValue;
+        }
+
+        function setData(key, value) {
+            localStorage.setItem(key, JSON.stringify(value));
+        }
+
+        // Cargar Jurados (del original, con defaults)
+        function loadJurors() {
+            const jurors = getData('jurors', [
+                { id: 1, nombre: 'Jurado General', apellido: '' }
+            ]);
+            setData('jurors', jurors);
+            const select = document.getElementById('juradoSelect');
+            select.innerHTML = '<option value="1">Voto General (Jurado 1)</option>';
+            jurors.forEach(juror => {
+                if (juror.id > 1) {
+                    const option = document.createElement('option');
+                    option.value = juror.id;
+                    option.textContent = `${juror.nombre} ${juror.apellido}`;
+                    select.appendChild(option);
+                }
+            });
+            select.addEventListener('change', (e) => {
+                currentJurorId = parseInt(e.target.value) || 1;
+                loadCandidates(); // Recargar para actualizar votos por jurado
+            });
+        }
+
+        // Cargar Jurados (del original, con defaults)
+        function loadJurors() {
+            const jurors = getData('jurors', [
+                { id: 1, nombre: 'Jurado General', apellido: '' }
+            ]);
+            setData('jurors', jurors);
+            const select = document.getElementById('juradoSelect');
+            select.innerHTML = '<option value="1">Voto General (Jurado 1)</option>';
+            jurors.forEach(juror => {
+                if (juror.id > 1) {
+                    const option = document.createElement('option');
+                    option.value = juror.id;
+                    option.textContent = `${juror.nombre} ${juror.apellido}`;
+                    select.appendChild(option);
+                }
+            });
+            select.addEventListener('change', (e) => {
+                currentJurorId = parseInt(e.target.value) || 1;
+                loadCandidates(); // Recargar para actualizar votos por jurado
+            });
+        }
+
+        // Cargar Categorías (defaults si no hay)
+        function loadCategories() {
+            categories = getData('categories', [
+                { id: 1, name: 'Presencia Escénica' },
+                { id: 2, name: 'Talento Artístico' },
+                { id: 3, name: 'Creatividad' },
+                { id: 4, name: 'Carisma' }
+            ]);
+            setData('categories', categories);
+        }
+
+        // Generar 20 Candidatos Ficticios (si no hay en localStorage)
+        function generateAndLoadCandidates() {
+            let candidates = getData('candidates', []);
+            if (candidates.length === 0) {
+                // Generar 20 candidatos ficticios con descripciones
+                const firstNames = ['Diego', 'Juan', 'Carlos', 'Miguel', 'Andrés', 'Luis', 'José', 'Francisco', 'Antonio', 'Manuel', 'Pedro', 'Fernando', 'Ricardo', 'Santiago', 'Gabriel', 'Rafael', 'Javier', 'Alejandro', 'Roberto', 'Eduardo'];
+                const lastNames = ['Ramos', 'Pérez', 'López', 'García', 'Martínez', 'Hernández', 'González', 'Rodríguez', 'Torres', 'Sánchez', 'Ramírez', 'Morales', 'Cruz', 'Vega', 'Ortega', 'Castillo', 'Flores', 'Mendoza', 'Silva', 'Navarro'];
+                const descriptions = [
+                    'Artista urbano con pasión por el graffiti.',
+                    'Músico talentoso en guitarra clásica.',
+                    'Escultor innovador en materiales reciclados.',
+                    'Pintor abstracto con influencias modernas.',
+                    'Fotógrafo de arte callejero.',
+                    'Diseñador gráfico creativo.',
+                    'Bailarín contemporáneo.',
+                    'Poeta y escritor emergente.',
+                    'Ceramista tradicional.',
+                    'Ilustrador digital.',
+                    'Actor de teatro experimental.',
+                    'Compositor de música electrónica.',
+                    'Joyería artesanal.',
+                    'Videógrafo artístico.',
+                    'Tatuador con estilo único.',
+                    'Cantante de ópera.',
+                    'Arquitecto de instalaciones.',
+                    'Chef artístico en presentaciones.',
+                    'Modisto de moda sostenible.',
+                    'Programador de arte generativo.'
+                ];
+                candidates = [];
+                for (let i = 0; i < 20; i++) {
+                    const candidate = {
+                        id: i + 1,
+                        nombre: firstNames[i % firstNames.length],
+                        apellido: lastNames[i % lastNames.length],
+                        edad: 18 + Math.floor(Math.random() * 13), // 18-30 años
+                        foto: `https://images.unsplash.com/photo-${Math.floor(Math.random() * 1000 + 1)}?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80&crop=face`, // Imágenes reales de Unsplash (retratos aleatorios de hombres jóvenes/artísticos)
+                        descripcion: descriptions[i % descriptions.length]
+                    };
+                    candidates.push(candidate);
+                }
+                setData('candidates', candidates);
+            }
+            loadCandidates();
+        }
+
+        // Cargar Galería de Candidatos
+        function loadCandidates() {
+            const candidates = getData('candidates');
+            const gallery = document.getElementById('candidatesGallery');
+            gallery.innerHTML = '';
+            const evaluations = getData('evaluations', []);
+            candidates.forEach(candidate => {
+                const hasVoted = evaluations.some(e => e.jurorId === currentJurorId && e.candidateId === candidate.id);
+                const card = document.createElement('div');
+                card.className = `candidate-card ${hasVoted ? 'voted' : ''}`;
+                card.innerHTML = `
+                    <div class="candidate-photo-container">
+                        <div class="epa-logo">EPA</div>
+                        <img src="${candidate.foto}" alt="${candidate.nombre} ${candidate.apellido}" class="candidate-photo" onclick="openVoteModal(${candidate.id})">
+                    </div>
+                    <h3 class="candidate-name">${candidate.nombre} ${candidate.apellido}</h3>
+                    <p class="candidate-age">${candidate.edad} años</p>
+                    <p class="candidate-description">${candidate.descripcion}</p>
+                `;
+                gallery.appendChild(card);
+            });
+        }
+
+        // Abrir Modal de Votación/Edición
+        function openVoteModal(candidateId) {
+            currentCandidate = getData('candidates').find(c => c.id === candidateId);
+            if (!currentCandidate) return;
+            const evaluations = getData('evaluations', []);
+            const existingVote = evaluations.find(e => e.jurorId === currentJurorId && e.candidateId === candidateId);
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+            const scoresContainer = document.getElementById('scoresContainer');
+            modalTitle.innerHTML = `${existingVote ? 'Modificar Voto' : 'Votar por'} ${currentCandidate.nombre} ${currentCandidate.apellido}`;
+            if (existingVote) {
+                modalMessage.innerHTML = `¿Desea modificar su puntuación actual? (Ejemplo: ${Object.values(existingVote.scores).reduce((a, b) => a + b, 0)} puntos totales asignados previamente)`;
+            } else {
+                modalMessage.textContent = 'Asigne puntos del 1 al 10 por cada categoría.';
+            }
+            // Generar inputs para categorías
+            scoresContainer.innerHTML = '';
+            categories.forEach(cat => {
+                const div = document.createElement('div');
+                const inputId = `score-${cat.id}`;
+                const currentScore = existingVote ? (existingVote.scores[cat.id] || '') : '';
+                div.innerHTML = `
+                    <label>${cat.name}: <input type="number" class="score-input" id="${inputId}" min="1" max="10" value="${currentScore}"></label>
+                `;
+                scoresContainer.appendChild(div);
+            });
+            document.getElementById('voteModal').style.display = 'block';
+        }
+
+        // Cerrar Modal
+        function closeModal() {
+            document.getElementById('voteModal').style.display = 'none';
+            currentCandidate = null;
+        }
+
+        // Guardar Voto
+        function saveVote() {
+            if (!currentCandidate) return;
+            const scores = {};
+            let valid = true;
+            categories.forEach(cat => {
+                const input = document.getElementById(`score-${cat.id}`);
+                const value = parseInt(input.value);
+                if (isNaN(value) || value < 1 || value > 10) {
+                    alert(`Puntaje inválido para ${cat.name}. Debe ser 1-10.`);
+                    valid = false;
+                    return;
+                }
+                scores[cat.id] = value;
+            });
+            if (!valid) return;
+            const total = Object.values(scores).reduce((sum, score) => sum + score, 0);
+            const avg = total / categories.length;
+            const evaluation = {
+                jurorId: currentJurorId,
+                candidateId: currentCandidate.id,
+                scores,
+                total: avg
+            };
+            let evaluations = getData('evaluations');
+            const index = evaluations.findIndex(e => e.jurorId === currentJurorId && e.candidateId === currentCandidate.id);
+            if (index > -1) {
+                evaluations[index] = evaluation;
+            } else {
+                evaluations.push(evaluation);
+            }
+            setData('evaluations', evaluations);
+            alert(existingVote ? 'Puntuación modificada exitosamente!' : 'Voto guardado exitosamente!');
+            closeModal();
+            loadCandidates(); // Recargar para actualizar visual (filtro gris)
+        }
+
+        // Cerrar modal al clic fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('voteModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

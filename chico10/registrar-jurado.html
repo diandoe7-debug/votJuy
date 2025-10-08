@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Jurado - Elección CHICO 10</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">CHICO 10</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="registrar-candidato.html">Registrar Candidato</a></li>
+                <li><a href="registrar-jurado.html">Registrar Jurado</a></li>
+                <li><a href="configurar-categorias.html">Configurar Categorías</a></li>
+                <li><a href="evaluacion.html">Evaluación</a></li>
+                <li><a href="ranking.html">Ranking</a></li>
+                <li><a href="estadisticas.html">Estadísticas</a></li>
+            </ul>
+            <div class="hamburger">☰</div>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1 style="font-family: 'Georgia', serif; color: var(--accent-gold); text-align: center;">Registrar Jurado</h1>
+            
+            <form id="juradoForm">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required>
+
+                <label for="foto">Foto (opcional):</label>
+                <input type="file" id="foto" name="foto" accept="image/*">
+                <div id="juradoPreview" class="image-preview">Vista previa de foto (selecciona una imagen)</div>
+
+                <label for="categorias">Categoría de Especialidad (opcional):</label>
+                <select id="categorias" name="categorias">
+                    <option value="">Selecciona una categoría</option>
+                </select>
+
+                <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Registrar Jurado</button>
+            </form>
+
+            <div class="juror-list" id="jurorList" style="margin-top: 2rem;">
+                <!-- Lista de jurados registrados se puede agregar aquí si se extiende el JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Elección CHICO 10 - Escuela de Arte</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

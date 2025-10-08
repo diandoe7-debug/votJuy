@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Elección Miss Paisana Argentina</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Iconos de Font Awesome para elementos folclóricos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <header class="header-gaucho">
+        <div class="header-content">
+            <div class="logo-folclorico">
+                <i class="fas fa-hat-cowboy"></i> <!-- Icono de sombrero gaucho -->
+                <h1>Miss Paisana Argentina</h1>
+                <i class="fas fa-boot"></i> <!-- Icono de bota gaucha -->
+            </div>
+            <p class="subtitle">Celebrando el alma de la pampa: gauchos valientes, paisanas radiantes, folclore vivo y sabores como el asado humeante y las empanadas criollas. ¡Viva la tradición!</p>
+            <nav class="nav-folclorica">
+                <ul>
+                    <li><a href="#login" onclick="showSection('login')"><i class="fas fa-user-check"></i> Jurado</a></li>
+                    <li><a href="#admin" onclick="showSection('admin')"><i class="fas fa-crown"></i> Admin</a></li>
+                    <li><a href="#voting" onclick="showSection('voting')"><i class="fas fa-vote-yea"></i> Votar</a></li>
+                    <li><a href="#ranking" onclick="showSection('ranking')"><i class="fas fa-trophy"></i> Ranking</a></li>
+                    <li><a href="#reports" onclick="showSection('reports')"><i class="fas fa-chart-bar"></i> Reportes</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-bg-pattern"></div>
+    </header>
+
+    <main class="main-pampa">
+        <!-- Sección de Login/Registro de Jurados -->
+        <section id="login" class="section active card-folclorica">
+            <div class="section-header">
+                <h2><i class="fas fa-door-open"></i> Registro o Sesión de Jurado</h2>
+                <p>Únete al jurado como un gaucho en la ronda. Sube tu foto para el toque personal.</p>
+            </div>
+            <form id="juradoForm" class="form-rustico">
+                <div class="input-group">
+                    <label for="nombre"><i class="fas fa-user"></i> Nombre:</label>
+                    <input type="text" id="nombre" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="apellido"><i class="fas fa-user-tie"></i> Apellido:</label>
+                    <input type="text" id="apellido" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="fotoJurado"><i class="fas fa-camera"></i> Foto (opcional, como un retrato gaucho):</label>
+                    <input type="file" id="fotoJurado" accept="image/*">
+                </div>
+                
+                <div class="input-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email (clave de acceso):</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <button type="submit" class="btn-gaucho"><i class="fas fa-sign-in-alt"></i> Entrar al Redil</button>
+            </form>
+            <div id="juradoInfo" class="mensaje-folclorico"></div>
+        </section>
+
+        <!-- Sección Admin: Configuración de Categorías y Candidatas -->
+        <section id="admin" class="section card-folclorica">
+            <div class="section-header">
+                <h2><i class="fas fa-cog"></i> Panel del Organizador</h2>
+                <p>Configura como un artesano del folclore: categorías inspiradas en la vida paisana.</p>
+            </div>
+            
+            <!-- Configuración de Categorías -->
+            <div class="admin-panel card-paisana">
+                <h3><i class="fas fa-list"></i> Categorías Personalizables</h3>
+                <p>Ejemplos: Belleza Gaucha, Danza Folclórica, Sabor Regional (¡empanadas y mate!).</p>
+                <div class="input-group">
+                    <input type="text" id="nuevaCategoria" placeholder="Nueva categoría (ej: 'Gaucha en el Asado')" required>
+                    <button onclick="agregarCategoria()" class="btn-secundario"><i class="fas fa-plus"></i> Agregar</button>
+                </div>
+                <ul id="categoriasList" class="lista-tradicional"></ul>
+            </div>
+
+            <!-- Carga de Candidatas -->
+            <div class="admin-panel card-paisana">
+                <h3><i class="fas fa-user-plus"></i> Cargar Paisana</h3>
+                <form id="candidataForm" class="form-rustico">
+                    <div class="input-group">
+                        <label for="nombreCandidata"><i class="fas fa-crown"></i> Nombre:</label>
+                        <input type="text" id="nombreCandidata" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="infoCandidata"><i class="fas fa-heart"></i> Info (origen, pasión por gauchos y folclore):</label>
+                        <textarea id="infoCandidata" required placeholder="Ej: De la pampa salteña, amante de la chacarera y el locro."></textarea>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="fotoCandidata"><i class="fas fa-image"></i> Foto (en traje paisano):</label>
+                        <input type="file" id="fotoCandidata" accept="image/*" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-gaucho"><i class="fas fa-upload"></i> Lanzar al Escenario</button>
+                </form>
+                <div id="candidatasList" class="grid-candidatas"></div>
+            </div>
+        </section>
+
+        <!-- Sección de Votación -->
+        <section id="voting" class="section card-folclorica">
+            <div class="section-header">
+                <h2><i class="fas fa-star"></i> Votación del Jurado</h2>
+                <p>Evalúa con el ojo de un experto en folclore. Puntajes del 1 al 10, como estrellas en la noche pampeana.</p>
+            </div>
+            <div class="input-group">
+                <label for="seleccionarCandidata"><i class="fas fa-search"></i> Selecciona la Paisana:</label>
+                <select id="seleccionarCandidata">
+                    <option value="">Elige una candidata</option>
+                </select>
+            </div>
+            <div id="formVotacion" class="form-votacion"></div>
+            <button id="enviarVotos" onclick="enviarVotos()" style="display:none;" class="btn-gaucho grande"><i class="fas fa-paper-plane"></i> Enviar Votos al Cielo</button>
+        </section>
+
+        <!-- Sección de Ranking -->
+        <section id="ranking" class="section card-folclorica">
+            <div class="section-header">
+                <h2><i class="fas fa-podium"></i> Ranking en Tiempo Real</h2>
+                <p>¡El pulso de la elección! Como un rodeo de gauchos, el líder cambia con cada voto.</p>
+            </div>
+            <div class="ranking-container">
+                <table id="rankingTable" class="tabla-gaucha">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-medal"></i> Posición</th>
+                            <th><i class="fas fa-image"></i> Retrato</th>
+                            <th><i class="fas fa-user"></i> Nombre & Esencia</th>
+                            <th><i class="fas fa-star"></i> Puntaje Total</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección de Reportes -->
+        <section id="reports" class="section card-folclorica">
+            <div class="section-header">
+                <h2><i class="fas fa-file-alt"></i> Reportes y Estadísticas</h2>
+                <p>Analiza como un historiador del folclore: números que cuentan la historia de la elección.</p>
+            </div>
+            <button onclick="generarReporte()" class="btn-gaucho"><i class="fas fa-chart-line"></i> Generar Reporte</button>
+            <div id="reporteContent" class="reporte-folclorico"></div>
+            <canvas id="graficoPuntajes" class="grafico-pampa" width="600" height="300"></canvas>
+        </section>
+    </main>
+
+    <footer class="footer-pampa">
+        <p><i class="fas fa-heart"></i> Diseñado con pasión por el folclore argentino. Ex alumno de la Escuela de Artes, ingeniero fullstack y amante del diseño 3D. ¡Viva la paisana! Sistema local seguro para red interna.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Para gráficos más pro -->
+    <script src="script.js"></script>
+</body>
+</html>

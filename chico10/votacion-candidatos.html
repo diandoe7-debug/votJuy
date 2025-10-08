@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votación de Candidatos - Elección CHICO 10</title>
+    <link rel="stylesheet" href="../css/style.css"> <!-- CSS global original -->
+    <link rel="stylesheet" href="css/votacion-style.css"> <!-- CSS específico para votación -->
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">CHICO 10</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="votacion-candidatos.html">Votación</a></li>
+                <li><a href="ranking.html">Ranking</a></li>
+                <li><a href="estadisticas.html">Estadísticas</a></li>
+            </ul>
+            <div class="hamburger">☰</div>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1 style="font-family: 'Georgia', serif; color: var(--accent-gold); text-align: center; font-size: 3rem; margin-bottom: 1rem;">Votación de Candidatos</h1>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Haz clic en la foto de un candidato para votar o editar tu puntuación. Estilo inspirado en Mister Universe. Escuela Provincial de Arte de Jujuy (EPA).</p>
+
+            <!-- Select de Jurado (para persistir votos por jurado; opcional) -->
+            <div class="jurado-select">
+                <label for="juradoSelect">Seleccionar Jurado:</label>
+                <select id="juradoSelect">
+                    <option value="">Vota como jurado general (o selecciona uno)</option>
+                    <!-- Opciones se cargan dinámicamente por JS -->
+                </select>
+            </div>
+
+            <div id="candidatesGallery" class="candidates-gallery">
+                <!-- Galería de 20 candidatos se carga dinámicamente por JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Elección CHICO 10 - Escuela Provincial de Arte de Jujuy (EPA)</p>
+    </footer>
+
+    <!-- Modal para Votación/Edición -->
+    <div id="voteModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Votar por <span id="candidateNameModal"></span></h2>
+            <p id="modalMessage"></p>
+            <div id="scoresContainer" class="score-section">
+                <!-- Inputs de categorías se cargan dinámicamente -->
+            </div>
+            <div class="total-score-modal">
+                Total de Puntos: <span id="totalScoreModal">0</span> / <span id="maxScoreModal"></span>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn" onclick="resetScores()">Resetear Puntajes</button>
+                <button class="btn" onclick="saveVote()">Aceptar</button>
+                <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script> <!-- JS global original (para navegación) -->
+    <script src="js/votacion-script.js"></script> <!-- JS específico para votación -->
+</body>
+</html>
